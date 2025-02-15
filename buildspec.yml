@@ -1,0 +1,23 @@
+version: 0.2
+
+phases:
+  install:
+    on-failure: ABORT
+    commands:
+      - make codebuild-install-java
+      - make codebuild-install-maven
+
+  pre-build:
+    on-failure: ABORT
+    commands:
+      - make package
+
+  build:
+    on-failure: ABORT
+    commands:
+      - make package
+
+artifacts:
+  files:
+    - target/*.jar
+  discard-paths: yes
